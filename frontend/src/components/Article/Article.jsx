@@ -31,7 +31,7 @@ function Article({ post }) {
   // Function to delete a publication
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/posts/${post._id}`, { data: { userId: currentUser._id } });
+      await axios.delete(`/posts/${post._id}`, { data: { userId: currentUser._id } });
       //You may want to remove the deleted post from the 'posts' status here
     } catch (err) {
       console.log(err);
@@ -56,7 +56,7 @@ function Article({ post }) {
       }
   
       // Send updated data to the server
-      await axios.put(`/api/posts/${post._id}`, updatedData);
+      await axios.put(`/posts/${post._id}`, updatedData);
   
       // Maintain data in the component
       post.title = editedTitle;
@@ -143,9 +143,14 @@ const handleLike = async () => {
           </div>
 
 
-          {/* Renderizar el formulario de edición si está en modo de edición */}
+          {/* Render the edit form if in edit mode */}
           {editing && (
             <div className="editForm">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setEditedFile(e.target.files[0])}
+              />
               <input
                 type="text"
                 value={editedTitle}
@@ -158,9 +163,9 @@ const handleLike = async () => {
                 onChange={(e) => setEditedDescription(e.target.value)}
               />
               <button onClick={handleUpdate}>Save changes</button>
+              <button onClick={toggleEdit}>Cancel</button> {/* Add a cancel button*/}
             </div>
           )}
-
 
           </Card.Body>
 
