@@ -93,13 +93,12 @@ const handleLike = async () => {
   setIsLiked(!isLiked);
 };
 
-
   return (
     <>
       <Col>
         <Card className='card' style={{height: '30rem', marginBottom:'3rem'}}>
           <div className='postUser'>
-              <Link to={`/profile/${user.username}`} >
+              <Link to={`/friends/${user.username}`} >
                 <img
                 src={
                   user.profilePicture

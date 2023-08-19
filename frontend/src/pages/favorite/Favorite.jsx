@@ -15,7 +15,7 @@ export default function Favorite() {
 
     const { user } = useContext(AuthContext);
 
-    //to show favorite posts
+    //to show all posts
     useEffect(() => {
         const fetchFavoritePosts = async() => {
         const response = await axios.get(`/posts/favorite/${user._id}`) //post.js 8.

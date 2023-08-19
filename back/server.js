@@ -7,7 +7,7 @@ const userRoute = require("./routes/users")
 const authRoute = require("./routes/auth")
 const postRoute = require("./routes/posts")
 const uploadRoute = require("./routes/upload")
-const setPicRoute = require("./routes/setPic")
+const settingRoute = require("./routes/setting")
 const PORT = 8000
 
 
@@ -23,7 +23,7 @@ app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/upload", uploadRoute);
-app.use("/api/setPic", setPicRoute)
+app.use("/api/setting", settingRoute)
 
 
 //connect to MongoDB

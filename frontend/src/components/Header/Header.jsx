@@ -45,7 +45,7 @@ function Header() {
                     <Link className="headerLink" to="/"><HomeIcon /></Link>
                 </div>
                 <div className="headerIconItem">
-                    <Link className="headerLink" to={`/setPic/${user.username}`}><SettingsIcon /></Link>
+                    <Link className="headerLink" to={`/setting/${user.username}`}><SettingsIcon /></Link>
                 </div>
                 <div className="headerIconItem">
                     <Link className="headerLink" to={`/profile/${user.username}`}><PersonIcon /></Link>

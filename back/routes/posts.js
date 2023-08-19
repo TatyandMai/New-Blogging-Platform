@@ -63,13 +63,13 @@ router.put("/:id/like", async(req, res) => { //id = post id
     }
 })
 
-//5.get a post
-router.get("/:id", async (req, res) => { //id = post id
+// //5.get all post
+router.get("/all", async(req, res) => {
     try{
-        const post = await Post.findById(req.params.id); //post id
-        res.status(200).json(post);
+        const allPosts = await Post.find({});
+        res.send(allPosts)
     }catch(err){
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 })
 

@@ -1,17 +1,17 @@
-import "./SetPic.css"
-import React, { useState } from 'react'
+import "./Setting.css"
+import React, { useState, useRef } from 'react'
 import axios from 'axios';
 import Header from "../../components/Header/Header";
 // import { useNavigate } from 'react-router-dom';
 
-export default function SetPic() {
+export default function Setting() {
 
     const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
     const [profilePic, setProfilePic] = useState(null);
     const [coverPic, setCoverPic] = useState(null);
 
-    // const navigate = useNavigate();
+    const desc = useRef()
 
     //to get a user data
     const user = JSON.parse(localStorage.getItem("user"))
@@ -19,24 +19,32 @@ export default function SetPic() {
     //button for setting pictures
     const handleProfile = async (e) => {
         e.preventDefault();
-        const newPicture = {
-            userId: user._id
+        const newInfo = {
+            userId: user._id,
+            desc: desc.current.value,
         }
         //set profile picture
+        if(profilePic){
             const data = new FormData();
             const fileName = Date.now() + profilePic.name;
             data.append("name", fileName);
             data.append("file", profilePic);
-            newPicture.profilePicture = fileName;
+            newInfo.profilePicture = fileName;
             // console.log(newPicture)
             try{
                 //API for setting profile picture
-                await axios.put(`/setPic/profilePic/${user._id}`, data); //setPic.js 1
+                await axios.put(`/setting/profilePic/${user._id}`, data); //setting.js 1
             }catch(err){
                 console.log(err)
             }
-            // navigate(`/profile/${user._id}`);
-            window.location.reload(); //reload automatically after posted
+        }
+            try{
+                //API for setting profile picture
+                await axios.put(`/setting/information/${user._id}`, newInfo); //setting.js 3
+                window.location.reload(); //reload automatically after posted
+            }catch(err){
+                console.log(err)
+            }
     }
 
 
@@ -54,7 +62,7 @@ export default function SetPic() {
             // console.log(newPicture)
             try{
                 //API for setting profile picture
-                await axios.put(`/setPic/coverPic/${user._id}`, data); //setPic.js 2
+                await axios.put(`/setting/coverPic/${user._id}`, data); //setting.js 2
             }catch(err){
                 console.log(err)
             }
@@ -89,7 +97,17 @@ export default function SetPic() {
             accept='.png, .jpeg, .jpg'
             onChange={(e) => setProfilePic(e.target.files[0])}
             />
-            <button className="setting-button" type='submit' >Set your profile picture</button>
+             <h4>Your Information</h4>
+            <textarea
+            className='post-description'
+            rows="5"
+            cols="40"
+            type='text'
+            placeholder="Description"
+            ref={desc}
+            />
+
+<button className="setting-button" type='submit' >Set your profile picture</button>
         </form>
 
         <form className='setting-form' onSubmit={(e) => handleCover(e)}>
