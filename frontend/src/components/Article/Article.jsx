@@ -31,15 +31,7 @@ function Article({ post }) {
   // Function to delete a publication
   const handleDelete = async () => {
     try {
-<<<<<<< HEAD
-<<<<<<< HEAD
       await axios.delete(`/posts/${post._id}`, { data: { userId: currentUser._id } });
-=======
-      await axios.delete(`/api/posts/${post._id}`, { data: { userId: currentUser._id } });
->>>>>>> origin
-=======
-      await axios.delete(`/posts/${post._id}`, { data: { userId: currentUser._id } });
->>>>>>> 258a1cd43855c59214273dea8f27b2fb997e46a1
       //You may want to remove the deleted post from the 'posts' status here
     } catch (err) {
       console.log(err);
@@ -62,38 +54,15 @@ function Article({ post }) {
         const response = await axios.post("/upload", formData);
         updatedData.img = response.data.fileName;
       }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 258a1cd43855c59214273dea8f27b2fb997e46a1
 
       // Send updated data to the server
       await axios.put(`/posts/${post._id}`, updatedData);
-
-<<<<<<< HEAD
-=======
-  
-      // Send updated data to the server
-      await axios.put(`/api/posts/${post._id}`, updatedData);
-  
->>>>>>> origin
-=======
->>>>>>> 258a1cd43855c59214273dea8f27b2fb997e46a1
       // Maintain data in the component
       post.title = editedTitle;
       post.description = editedDescription;
       if (updatedData.img) {
         post.img = updatedData.img;
       }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> origin
-=======
-
->>>>>>> 258a1cd43855c59214273dea8f27b2fb997e46a1
       setEditing(false); // Exit edit mode
     } catch (err) {
       console.log(err);
