@@ -22,7 +22,7 @@ export default function Profile() {
 useEffect(() => {
   const fetchPosts = async () => {
     try {
-      const response = await axios.get(`api/posts/article/${user._id}`);
+      const response = await axios.get(`/posts/article/${user._id}`);
       setPosts(response.data.sort((post1, post2) => {
         return new Date(post2.createdAt) - new Date(post1.createdAt);
       }));

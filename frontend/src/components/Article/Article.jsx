@@ -31,7 +31,7 @@ function Article({ post }) {
   // Function to delete a publication
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/posts/${post._id}`, { data: { userId: currentUser._id } });
+      await axios.delete(`/posts/${post._id}`, { data: { userId: currentUser._id } });
       //You may want to remove the deleted post from the 'posts' status here
     } catch (err) {
       console.log(err);
@@ -54,23 +54,23 @@ function Article({ post }) {
         const response = await axios.post("/upload", formData);
         updatedData.img = response.data.fileName;
       }
-  
+
       // Send updated data to the server
-      await axios.put(`/api/posts/${post._id}`, updatedData);
-  
+      await axios.put(`/posts/${post._id}`, updatedData);
+
       // Maintain data in the component
       post.title = editedTitle;
       post.description = editedDescription;
       if (updatedData.img) {
         post.img = updatedData.img;
       }
-  
+
       setEditing(false); // Exit edit mode
     } catch (err) {
       console.log(err);
     }
   };
-  
+
 
 //get a user data to show the post (user who posted the article)
 useEffect(() => {
@@ -135,10 +135,12 @@ const handleLike = async () => {
             <span className="postLikeCounter"> {like} people like it</span>
             {/* Edit and Delete buttons */}
             {currentUser._id === post.userId && (
-              <>
+              <div>
+                <Link to= {`/editPost/${currentUser.username}`}>
                 <button onClick={toggleEdit}>Edit</button>
+                </Link>
                 <button onClick={handleDelete}>Delete</button>
-              </>
+              </div>
             )}
           </div>
 

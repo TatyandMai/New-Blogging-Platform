@@ -9,6 +9,7 @@ import Post from "./pages/post/Post";
 import Favorite from './pages/favorite/Favorite';
 import SetPic from "./pages/setPicture/SetPic";
 import Friends from './pages/friends/Friends';
+import Edit from './pages/edit/Edit';
 import { AuthContext } from './state/AuthContext';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path='/friends/:username' element={<Friends />} />
           <Route path='/post' element={<Post />} />
           <Route path='/favorite/:username' element={<Favorite />} />
+          <Route path='/editPost/:username' element={<Edit />} />
         </Routes>
       </BrowserRouter>
     </div>
