@@ -42,7 +42,7 @@ router.put("/coverPic/:userId", uploadCover.single("file"), async (req, res) => 
 })
 
 //3, setting user information
-router.put("/:id", async (req, res) => { // :id = params.id
+router.put("/information/:id", async (req, res) => { // :id = params.id
     if(req.body.userId === req.params.id || req.body.isAdmin){
         try{
             const user = await User.findByIdAndUpdate(req.params.id, {
@@ -58,5 +58,6 @@ router.put("/:id", async (req, res) => { // :id = params.id
         .json("You can update only your account");
     }
 });
+
 
 module.exports = router;
