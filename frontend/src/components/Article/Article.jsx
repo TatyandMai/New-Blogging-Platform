@@ -36,6 +36,7 @@ function Article({ post }) {
     try {
       await axios.delete(`/posts/${post._id}`, { data: { userId: currentUser._id } });
       //You may want to remove the deleted post from the 'posts' status here
+      window.location.reload(); //reload automatically after posted
     } catch (err) {
       console.log(err);
     }

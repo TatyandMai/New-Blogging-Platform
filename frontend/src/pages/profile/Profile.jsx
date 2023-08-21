@@ -75,9 +75,9 @@ useEffect(() => {
               </div>
 
               <div>
-                <ul className="friendsList">
+                <ul className="friendsList" key={user.id}>
                   {friends.map((friend) => (
-                    <li className="friendList" key={friend.username}>
+                    <li className="friendList">
                         <Link to= {`/friends/${friend.username}`}>
                             <img
                             src={
