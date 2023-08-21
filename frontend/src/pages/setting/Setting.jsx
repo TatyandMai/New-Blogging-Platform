@@ -16,15 +16,12 @@ export default function Setting() {
 
     const desc = useRef()
 
-    // //to get a user data
-    // const user = JSON.parse(localStorage.getItem("user"))
-
     //button for setting pictures
     const handleProfile = async (e) => {
         e.preventDefault();
         const newInfo = {
-            userId: user._id,
-            desc: desc.current.value,
+            userId: user._id, //current user
+            desc: desc.current.value, //input data of user information
         }
         //set profile picture
         if(profilePic){
@@ -35,14 +32,14 @@ export default function Setting() {
             newInfo.profilePicture = fileName;
             // console.log(newPicture)
             try{
-                //API for setting profile picture
+                //to set profile picture
                 await axios.put(`/setting/profilePic/${user._id}`, data); //setting.js 1
             }catch(err){
                 console.log(err)
             }
         }
             try{
-                //API for setting user information
+                //to set user information
                 await axios.put(`/setting/information/${user._id}`, newInfo); //setting.js 3
                 window.location.reload(); //reload automatically after posted
             }catch(err){

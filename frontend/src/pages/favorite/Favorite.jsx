@@ -46,7 +46,9 @@ export default function Favorite() {
             <div className="favoriteArticles">
                 <Row xs={2} md={4} className="g-6">
                     {favoritePosts.map((favoritePost) => (
+                        <div>
                         <Article  post={favoritePost} key={favoritePost._id} />
+                        </div>
                     ))}
                 </Row>
             </div>

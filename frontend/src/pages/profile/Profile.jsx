@@ -30,8 +30,6 @@ useEffect(() => {
       console.log(err);
     }
   };
-
-
   fetchPosts();
 }, [user._id]);
 
@@ -104,7 +102,9 @@ useEffect(() => {
             <h1>POST and FRIEND'S ARTICLES</h1>
             <Row xs={2} md={4} className="g-6">
               {posts.map((post) => (
-                <Article  post={post} key={post._id} />
+                <div>
+                  <Article  post={post} key={post._id} />
+                </div>
               ))}
             </Row>
           </div>

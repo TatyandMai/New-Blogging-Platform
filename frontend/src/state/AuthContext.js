@@ -4,19 +4,6 @@ import AuthReducer from "./AuthReducer"
 //default
 const initialState = {
     user:JSON.parse(localStorage.getItem("user")) || null,
-//  user: {
-//     _id: "64c21350df0ba6d69be1e1ef",
-//     username: "test",
-//     email: "test@gmail.com",
-//     password: "123456",
-//     desc: "student",
-//     profilePicture: "https://assets.website-files.com/619e8d2e8bd4838a9340a810/647c106477f8934b266ba39c_profile-picture-og.webp",
-//     coverPicture: "",
-//     followers: [],
-//     followings:
-//     "64c22eac2659c42446f4036d",
-//     isAdmin: false,
-//   },
     isFetching: false,
     error: false,
 };

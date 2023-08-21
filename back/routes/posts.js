@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require("../models/Post");
 const User = require("../models/User");
+const multer = require("multer")// to upload file
 
 //1.create a post
 router.post("/", async (req, res) => {
@@ -14,13 +15,14 @@ router.post("/", async (req, res) => {
     }
 });
 
-//2.update a post
-router.put("/:id", async(req, res) => { //id = post id
+//2.update a post (title and description)
+router.put("/:id", async(req, res) => { //:id = post id
     try{
         const post = await Post.findById(req.params.id);
         console.log(post)
-        console.log(req.params)
-        if(post.userId === req.params.id){
+        console.log(req.body._id)
+
+        if(post.userId === req.body.userId){
             await post.updateOne( {$set: req.body} );
             return res.status(200).json("The post has been updated")
         }else{
@@ -28,6 +30,31 @@ router.put("/:id", async(req, res) => { //id = post id
         }
     }catch(err){
         return res.status(500).json(err)
+    }
+})
+
+//2.update post (picture)
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {//destination = save location
+        cb(null, "public/images"); //store posted image in "public/images"
+    },
+    filename: (req, file, cb)=> {  //file name
+       cb(null, req.body.name ); //req.body.name = fileName in Post.jsx
+     //cb(null, file.originalname); //this is for checking in postman
+    },
+});
+
+const uploadPic =  multer({ storage: storage });
+router.put("/postPic/:id", uploadPic.single("file"), async (req, res) => { //:id = post id
+    try{
+        const post = await Post.findById(req.params.id);
+        await post.updateOne({ $set: { img:req.file.filename}});
+        // console.log(post)
+        // console.log(req.file.filename)
+        await post.save();
+        return res.status(200).json("Post picture is set successfully");
+    }catch(err){
+        console.log(err)
     }
 })
 

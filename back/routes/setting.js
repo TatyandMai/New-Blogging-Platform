@@ -43,10 +43,10 @@ router.put("/coverPic/:userId", uploadCover.single("file"), async (req, res) => 
 
 //3, setting user information
 router.put("/information/:id", async (req, res) => { // :id = params.id
-    if(req.body.userId === req.params.id || req.body.isAdmin){
+    if(req.body.userId === req.params.id || req.body.isAdmin){ //userId = current userId
         try{
             const user = await User.findByIdAndUpdate(req.params.id, {
-                $set: req.body,
+                $set: req.body, //req.body = input data in setting page
             });
             console.log(user)
             return res.status(200).json("Account has been updated");

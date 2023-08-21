@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState, useEffect, useContext } from 'react';
+import "./Article.css"
+import { useState, useEffect, useContext, useRef } from 'react';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
@@ -7,6 +8,7 @@ import { Link } from "react-router-dom";
 // import TimeAgo from 'timeago-react';
 import { format } from 'timeago.js';
 import { AuthContext } from "../../state/AuthContext"
+
 
 function Article({ post }) {
 
@@ -17,11 +19,12 @@ function Article({ post }) {
   const [ user, setUser ] = useState({}); //the data of user who posted the article
   const [ like, setLike ] = useState(post.likes.length);
   const [ isLiked, setIsLiked ] = useState(false);
-
   const [editing, setEditing] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(post.title);
-  const [editedDescription, setEditedDescription] = useState(post.description);
   const [editedFile, setEditedFile] = useState(null);
+
+  const editedTitle = useRef()
+  const editedDesc = useRef()
+
 
   // Function to toggle editing mode
   const toggleEdit = () => {
@@ -38,67 +41,71 @@ function Article({ post }) {
     }
   };
 
-  const handleUpdate = async () => {
-    try {
-      // Data to be sent to the server
-      const updatedData = {
-        title: editedTitle,
-        description: editedDescription,
-      };
-  
+  //to edit post
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    // Data to be sent to the server
+    const updatedData = {
+        userId: currentUser._id,
+        id: post._id,
+        title: editedTitle.current.value,
+        description: editedDesc.current.value
+    };
+    console.log(updatedData)
       // If a new image was selected
-      if (editedFile) {
+    if (editedFile) {
         const formData = new FormData();
+        const fileName = Date.now() + editedFile.name;
+        formData.append("name", fileName);
         formData.append("file", editedFile);
-        // Upload the image to the server and get the file name
-        const response = await axios.post("/upload", formData);
-        updatedData.img = response.data.fileName;
-      }
-
-      // Send updated data to the server
-      await axios.put(`/posts/${post._id}`, updatedData);
-      // Maintain data in the component
-      post.title = editedTitle;
-      post.description = editedDescription;
-      if (updatedData.img) {
-        post.img = updatedData.img;
-      }
-      setEditing(false); // Exit edit mode
-    } catch (err) {
-      console.log(err);
+        updatedData.img = fileName;
+        console.log(fileName)
+        console.log(post)
+        try{
+            //to set the picture of the post
+            await axios.put(`/posts/postPic/${post._id}`, formData);// posts.js 2
+        }catch(err){
+            console.log(err)
+        }
     }
+    try{
+        //to set the title and description of the post
+        await axios.put(`/posts/${post._id}`, updatedData); //posts.js 2
+        window.location.reload(); //reload automatically after posted
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+  //get a user data to show the post (user who posted the article)
+  useEffect(() => {
+    const fetchUser = async() => {
+    const response = await axios.get(`/users?userId=${post.userId}`); //users.js 4
+    //post is props from timeline.jsx / userId is coming from models/User.js / post.userId = userId(user who posted the article)
+      setUser(response.data);
+    };
+    fetchUser();
+  }, [post.userId]);
+
+
+  //like function
+  const handleLike = async () => {
+    try{
+        await axios.put(`/posts/${post._id}/like`, {userId: currentUser._id }); //posts.js 4
+    } catch(err){
+        console.log(err);
+    }
+    setLike(isLiked ? like -1 : like +1);
+    setIsLiked(!isLiked);
   };
-
-
-//get a user data to show the post (user who posted the article)
-useEffect(() => {
-  const fetchUser = async() => {
-  const response = await axios.get(`/users?userId=${post.userId}`); //users.js 4
-  //post is props from timeline.jsx / userId is coming from models/User.js / post.userId = userId(user who posted the article)
-    setUser(response.data);
-  };
-  fetchUser();
-}, [post.userId]);
-
-
-
-//like function
-const handleLike = async () => {
-  try{
-      await axios.put(`/posts/${post._id}/like`, {userId: currentUser._id }); //posts.js 4
-  } catch(err){
-      console.log(err);
-  }
-  setLike(isLiked ? like -1 : like +1);
-  setIsLiked(!isLiked);
-};
 
   return (
     <>
       <Col>
-        <Card className='card' style={{height: '30rem', marginBottom:'3rem'}}>
+        <Card className='card' style={{height: '30rem', marginBottom:'20rem'}}>
           <div className='postUser'>
-              <Link to={`/friends/${user.username}`} >
+              <Link to={`/friends/${user.username}`} state={{post: "post"}} >  {/* state = to pass the data of post to Edit page */}
                 <img
                 src={
                   user.profilePicture
@@ -119,46 +126,60 @@ const handleLike = async () => {
           />
           <Card.Body style={{ height: '10rem' }}>
             <Card.Title>{post.title}</Card.Title>
-            <Card.Text>
-              {post.description}
-            </Card.Text>
+            <Card.Text>{post.description}</Card.Text>
             <div className="postBottomLeft">
-            <img
-            className="likeIcon"
-            src={PUBLIC_FOLDER + "heart.png"}
-            alt=""
-            onClick={() => handleLike()}
-            />
-            <span className="postLikeCounter"> {like} people like it</span>
+              <img
+              className="likeIcon"
+              src={PUBLIC_FOLDER + "heart.png"}
+              alt=""
+              onClick={() => handleLike()}
+              />
+              <span className="postLikeCounter"> {like} people like it</span>
+            </div>
+
             {/* Edit and Delete buttons */}
             {currentUser._id === post.userId && (
               <div>
-                <Link to= {`/editPost/${currentUser.username}`}>
                 <button onClick={toggleEdit}>Edit</button>
-                </Link>
                 <button onClick={handleDelete}>Delete</button>
               </div>
             )}
-          </div>
-
-
           {/* Renderizar el formulario de edición si está en modo de edición */}
           {editing && (
             <div className="editForm">
-              <input
-                type="text"
-                value={editedTitle}
-                onChange={(e) => setEditedTitle(e.target.value)}
-              />
-              <textarea
+              <form className='editPost-form'onSubmit={(e) => handleUpdate(e)} >
+              <h3>Edit</h3>
+                <input
+                className='editPost-title'
+                type='text'
+                placeholder="Title"
+                ref={editedTitle}
+                />
+                <textarea
+                className='editPost-description'
                 rows="5"
                 cols="40"
-                value={editedDescription}
-                onChange={(e) => setEditedDescription(e.target.value)}
-              />
-              <button onClick={handleUpdate}>Save changes</button>
+                type='text'
+                placeholder="Description"
+                ref={editedDesc}
+                />
+                <input
+                type="file"
+                className="editPost-file"
+                name="picture"
+                accept='.png, .jpeg, .jpg'
+                onChange={(e) => setEditedFile(e.target.files[0])}
+                />
+              <button className="editPost-button" type='submit' >Edit</button>
+              </form>
             </div>
           )}
+
+
+
+
+
+
 
 
           </Card.Body>

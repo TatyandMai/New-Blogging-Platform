@@ -9,7 +9,6 @@ import Post from "./pages/post/Post";
 import Favorite from './pages/favorite/Favorite';
 import Setting from "./pages/setting/Setting";
 import Friends from './pages/friends/Friends';
-import Edit from './pages/edit/Edit';
 import AllPosts from './pages/allPosts/AllPosts';
 import { AuthContext } from './state/AuthContext';
 
@@ -29,7 +28,6 @@ function App() {
           <Route path='/friends/:username' element={<Friends />} />
           <Route path='/post' element={<Post />} />
           <Route path='/favorite/:username' element={<Favorite />} />
-          <Route path='/editPost/:username' element={<Edit />} />
           <Route path='/allPosts/:username' element={<AllPosts />} />
         </Routes>
       </BrowserRouter>
