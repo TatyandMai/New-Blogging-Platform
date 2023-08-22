@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
 import { Link } from "react-router-dom";
-// import TimeAgo from 'timeago-react';
 import { format } from 'timeago.js';
 import { AuthContext } from "../../state/AuthContext"
 
@@ -104,7 +103,7 @@ function Article({ post }) {
   return (
     <>
       <Col>
-        <Card className='card' style={{height: '30rem', marginBottom:'20rem'}}>
+        <Card className='card' style={{height: '30rem', marginBottom:'3rem'}}>
           <div className='postUser'>
               <Link to={`/friends/${user.username}`} state={{post: "post"}} >  {/* state = to pass the data of post to Edit page */}
                 <img
@@ -118,7 +117,7 @@ function Article({ post }) {
               </Link>
                 <span className='postUsername'>{ user.username }</span>
                 <br />
-                  <span className="postDate">{format(post.createdAt)}</span>
+                <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <Card.Img
           variant="top"

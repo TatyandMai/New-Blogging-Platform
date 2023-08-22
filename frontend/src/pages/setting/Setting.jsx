@@ -23,6 +23,9 @@ export default function Setting() {
             userId: user._id, //current user
             desc: desc.current.value, //input data of user information
         }
+        const newPicture = {
+            userId: user._id
+        }
         //set profile picture
         if(profilePic){
             const data = new FormData();
@@ -34,6 +37,21 @@ export default function Setting() {
             try{
                 //to set profile picture
                 await axios.put(`/setting/profilePic/${user._id}`, data); //setting.js 1
+            }catch(err){
+                console.log(err)
+            }
+        }
+        if(coverPic){
+            //set profile picture
+            const data = new FormData();
+            const fileName = Date.now() + coverPic.name;
+            data.append("name", fileName);
+            data.append("file", coverPic);
+            newPicture.coverPicture = fileName;
+            // console.log(newPicture)
+            try{
+                //API for setting profile picture
+                await axios.put(`/setting/coverPic/${user._id}`, data); //setting.js 2
             }catch(err){
                 console.log(err)
             }
@@ -50,27 +68,27 @@ export default function Setting() {
     console.log(user)
 
 
-    const handleCover = async (e) => {
-        e.preventDefault();
-        const newPicture = {
-            userId: user._id
-        }
-        //set profile picture
-            const data = new FormData();
-            const fileName = Date.now() + coverPic.name;
-            data.append("name", fileName);
-            data.append("file", coverPic);
-            newPicture.coverPicture = fileName;
-            // console.log(newPicture)
-            try{
-                //API for setting profile picture
-                await axios.put(`/setting/coverPic/${user._id}`, data); //setting.js 2
-            }catch(err){
-                console.log(err)
-            }
-            // navigate(`/profile/${user._id}`);
-            window.location.reload(); //reload automatically after posted
-    }
+    // const handleCover = async (e) => {
+    //     e.preventDefault();
+    //     const newPicture = {
+    //         userId: user._id
+    //     }
+    //         //set profile picture
+    //         const data = new FormData();
+    //         const fileName = Date.now() + coverPic.name;
+    //         data.append("name", fileName);
+    //         data.append("file", coverPic);
+    //         newPicture.coverPicture = fileName;
+    //         // console.log(newPicture)
+    //         try{
+    //             //API for setting profile picture
+    //             await axios.put(`/setting/coverPic/${user._id}`, data); //setting.js 2
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //         // navigate(`/profile/${user._id}`);
+    //         window.location.reload(); //reload automatically after posted
+    // }
 
   return (
     <>
@@ -99,9 +117,19 @@ export default function Setting() {
             accept='.png, .jpeg, .jpg'
             onChange={(e) => setProfilePic(e.target.files[0])}
             />
-             <h4>Your Information</h4>
+            <hr></hr>
+            <h4>Select your profile cover picture</h4>
+            <input
+            type="file"
+            className="setCoverPic"
+            name="picture"
+            accept='.png, .jpeg, .jpg'
+            onChange={(e) => setCoverPic(e.target.files[0])}
+            />
+            <hr></hr>
+            <h4>Your Information</h4>
             <textarea
-            className='post-description'
+            className='userDescription'
             rows="5"
             cols="40"
             type='text'
@@ -109,10 +137,10 @@ export default function Setting() {
             ref={desc}
             />
 
-<button className="setting-button" type='submit' >Set your profile picture</button>
+            <button className="setting-button" type='submit' >Set your profile picture</button>
         </form>
 
-        <form className='setting-form' onSubmit={(e) => handleCover(e)}>
+        {/* <form className='setting-form' onSubmit={(e) => handleCover(e)}>
             <h4>Select your profile cover picture</h4>
             <input
             type="file"
@@ -122,7 +150,7 @@ export default function Setting() {
             onChange={(e) => setCoverPic(e.target.files[0])}
             />
             <button className="setting-button" type='submit' >Set your cover picture</button>
-        </form>
+        </form> */}
     </div>
     </>
   )

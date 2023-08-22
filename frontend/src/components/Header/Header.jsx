@@ -42,7 +42,7 @@ function Header() {
         <div className="headerRight">
             <div className="headerIcons">
                 <div className="headerIconItem">
-                    <Link className="headerLink" to="/"><HomeIcon /></Link>
+                    <Link className="headerLink" to={`/allPosts/${user.username}`}><HomeIcon /></Link>
                 </div>
                 <div className="headerIconItem">
                     <Link className="headerLink" to={`/setting/${user.username}`}><SettingsIcon /></Link>
