@@ -100,11 +100,11 @@ useEffect(() => {
             </div>
           </div>
         <hr />
-          <div className="profile-second-container">
+        <div className="profile-second-container">
             <h1>POST and FRIEND'S ARTICLES</h1>
             <Row xs={2} md={4} className="g-6">
               {posts.map((post) => (
-                <Article  post={post} key={post._id} />
+                <Article post={post} key={post._id} setPosts={setPosts} posts={posts} />
               ))}
             </Row>
           </div>

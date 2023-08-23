@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { format } from 'timeago.js';
 import { AuthContext } from "../../state/AuthContext"
 
-function Article({ post }) {
+function Article({ post, setPosts, posts }) {
 
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -32,44 +32,42 @@ function Article({ post }) {
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${post._id}`, { data: { userId: currentUser._id } });
-      //You may want to remove the deleted post from the 'posts' status here
+      // Update the posts state after successful deletion
+      const updatedPosts = posts.filter((p) => p._id !== post._id);
+      setPosts(updatedPosts);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleUpdate = async () => {
-    try {
-      // Data to be sent to the server
-      const updatedData = {
-        title: editedTitle,
-        description: editedDescription,
-      };
-  
-      // If a new image was selected
-      if (editedFile) {
-        const formData = new FormData();
-        formData.append("file", editedFile);
-        // Upload the image to the server and get the file name
-        const response = await axios.post("/upload", formData);
-        updatedData.img = response.data.fileName;
-      }
-  
-      // Send updated data to the server
-      await axios.put(`/posts/${post._id}`, updatedData);
-  
-      // Maintain data in the component
-      post.title = editedTitle;
-      post.description = editedDescription;
-      if (updatedData.img) {
-        post.img = updatedData.img;
-      }
-  
-      setEditing(false); // Exit edit mode
-    } catch (err) {
-      console.log(err);
+// Function to update a publication
+const handleUpdate = async () => {
+  try {
+    console.log("Updating post with ID:", post._id);
+    const updatedData = {
+      title: editedTitle,
+      description: editedDescription,
+    };
+
+    if (editedFile) {
+      const formData = new FormData();
+      formData.append("file", editedFile);
+      const response = await axios.post("/upload", formData);
+      updatedData.img = response.data.fileName;
     }
-  };
+
+    const response = await axios.put(`/posts/${post._id}`, updatedData);
+
+    // Update the posts state after successful update
+    const updatedPost = response.data;
+    const updatedPosts = posts.map((p) => (p._id === updatedPost._id ? updatedPost : p));
+    setPosts(updatedPosts);
+
+    setEditing(false);
+  } catch (err) {
+    console.log(err);
+  }
+};
   
 
 //get a user data to show the post (user who posted the article)
