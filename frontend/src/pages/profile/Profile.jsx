@@ -94,7 +94,7 @@ useEffect(() => {
           </div>
         <hr />
           <div className="profile-second-container">
-            <h1>YOUR POST and FRIEND'S ARTICLES</h1>
+            <h1>MY POSTS and FRIEND'S ARTICLES</h1>
             <Row xs={2} md={4} className="g-6">
               {posts.map((post) => (
                 <div>
