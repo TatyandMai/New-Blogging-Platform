@@ -92,7 +92,7 @@ return (
         <div className="profile-first-container">
             <div className="profileTop">
                 <img src={user.coverPicture || PUBLIC_FOLDER + "post/3.jpeg"} alt="" className="profileBackImg"/>
-                <img src={user.profilePicture || PUBLIC_FOLDER + "person/noAvatar.png"} alt="" className="profileImg"/>
+                <img src={user.profilePicture || PUBLIC_FOLDER + "noAvatar.png"} alt="" className="profileImg"/>
             </div>
             <div className="profileName">
                 <h2>{user.username}</h2>
@@ -128,7 +128,7 @@ return (
                             src={
                             friend.profilePicture
                             ? PUBLIC_FOLDER + friend.profilePicture
-                            : PUBLIC_FOLDER + "person/noAvatar.png" }
+                            : PUBLIC_FOLDER + "noAvatar.png" }
                             alt=''
                             className='friendProfileImg'
                             />

@@ -55,6 +55,24 @@
     margin-top: 10px;
 }
 
+.setting h1 {
+    position: relative;
+    padding: 1rem .5rem;
+}
+
+.setting h1::before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    content: '';
+    border-radius: 3px;
+    background-image: -webkit-gradient(linear, right top, left top, from(#3c6503), to(#bfcdbb));
+    background-image: -webkit-linear-gradient(right, #3c6503 0%, #bfcdbb 100%);
+    background-image: linear-gradient(to left, #3c6503 0%, #bfcdbb 100%);
+}
+
 @media screen and (max-width:513px){
     h1 {
         font-size: 20px;

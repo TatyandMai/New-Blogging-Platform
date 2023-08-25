@@ -23,39 +23,40 @@
     flex: 5;
 }
 
-.searchBar {
+/* .searchBar {
     width: 100%;
     height: 30px;
     background-color: white;
     border-radius: 30px;
     display: flex;
     align-items: center;
-}
+} */
 
-.searchIcon {
+/* .searchIcon {
     font-size: 20px !important;
     margin-left: 10px;
-}
+} */
 
-.searchInput {
+/* .searchInput {
     border: none;
     width: 70%;
-}
+} */
 
-.searchInput:focus {
+/* .searchInput:focus {
     outline: none;
-}
+} */
 
 .headerRight {
-    flex: 4;
+    flex: 2;
     display: flex;
     align-items: center;
     justify-content: space-around;
     color: black;
+    margin-right: 0px;
 }
 
 .headerLink {
-    margin-right: 10px;
+    margin-right: 5px;
     font-size: 14px;
     cursor: pointer;
     color: black;

@@ -10,14 +10,14 @@ export default function AllPosts() {
 
     const [ allPosts, setAllPosts ] = useState([]);
 
-    console.log(allPosts)
+    // console.log(allPosts)
 
     //to show all posts
     useEffect(() => {
         const fetchAllPosts = async() => {
         const response = await axios.get(`/posts/all`) //post.js 5.
         setAllPosts(response.data)
-        console.log(response)
+        // console.log(response)
         setAllPosts(response.data.sort((post1,post2) => { //sort post
             return new Date(post2.createdAt) - new Date(post1.createdAt);
         }));

@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { format } from 'timeago.js';
+// import { format } from 'timeago.js';
 import { AuthContext } from "../../state/AuthContext"
 
 
@@ -107,20 +107,20 @@ function Article({ post }) {
                 src={
                   user.profilePicture
                   ? user.profilePicture
-                  : PUBLIC_FOLDER + "person/noAvatar.png"}
+                  : PUBLIC_FOLDER + "noAvatar.png"}
                 alt=''
                 className='postProfileImg'
                 />
               </Link>
                 <span className='postUsername'>{ user.username }</span>
                 <br />
-                <span className="postDate">{format(post.createdAt)}</span>
+                {/* <span className="postDate">{format(post.createdAt)}</span> */}
                 {/* <span className="postDate">{moment(post.created_at).format('YYYY/MM/DD HH:mm')}</span> */}
           </div>
           <Card.Img
           variant="top"
           style={{ height: '10rem' }}
-          src={PUBLIC_FOLDER + post.img || PUBLIC_FOLDER + "person/noAvatar.png"}
+          src={PUBLIC_FOLDER + post.img || PUBLIC_FOLDER + "noAvatar.png"}
           />
           <Card.Body style={{ height: '10rem', marginBottom:"1rem" }}>
             <Card.Title style={{ height: '5%', marginBottom:"1rem" }}>{post.title}</Card.Title>

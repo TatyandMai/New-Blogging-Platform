@@ -1,16 +1,18 @@
 .allArticlesContainer{
-    min-height: 100vh;
-    min-width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    background-color:  #DEE4DA;
+    max-width: 100vw;
+    background-color: #E1E6E0;
     background-image: url(../../../public/assets/leaves-bottom.png), url(../../../public/assets/leaves-top.png);
-    background-repeat: no-repeat, no-repeat;
     background-repeat: no-repeat, no-repeat;
     background-position: right bottom, left top;
     background-size: 40% auto, 40% auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 50px;
 }
 
 .allArticlesContainer {
@@ -22,5 +24,23 @@
     min-width: 100vw;
     padding: 5%;
     text-align: center;
+}
+
+.allArticlesContainer h1 {
+    position: relative;
+    padding: 1rem .5rem;
+}
+
+.allArticlesContainer h1::before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    content: '';
+    border-radius: 3px;
+    background-image: -webkit-gradient(linear, right top, left top, from(#3c6503), to(#bfcdbb));
+    background-image: -webkit-linear-gradient(right, #3c6503 0%, #bfcdbb 100%);
+    background-image: linear-gradient(to left, #3c6503 0%, #bfcdbb 100%);
 }
 

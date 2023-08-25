@@ -77,7 +77,7 @@ export default function Setting() {
             src={
             user.profilePicture
             ? PUBLIC_FOLDER + user.profilePicture
-            : PUBLIC_FOLDER + "person/noAvatar.png"}
+            : PUBLIC_FOLDER + "noAvatar.png"}
             alt=""
             />
             <div className="setting-name">
