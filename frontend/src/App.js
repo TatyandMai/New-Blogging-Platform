@@ -12,6 +12,7 @@ import Friends from './pages/friends/Friends';
 import AllPosts from './pages/allPosts/AllPosts';
 import { AuthContext } from './state/AuthContext';
 
+
 function App() {
 
   const { user } = useContext(AuthContext);

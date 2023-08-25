@@ -1,7 +1,7 @@
 import './Header.css'
 import { useContext } from 'react';
 import { Link } from 'react-router-dom'
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -21,7 +21,6 @@ function Header() {
 		window.location.href = '/';
 	};
 
-
   return (
     <div className="headerContainer">
         <div className="headerLeft">
@@ -30,7 +29,7 @@ function Header() {
             alt='logo'
             className="logo" />
         </div>
-        <div className="headerCenter">
+        {/* <div className="headerCenter">
             <div className="searchBar">
                 <SearchIcon className="searchIcon" />
                 <input
@@ -38,7 +37,7 @@ function Header() {
                 className="searchInput"
                 />
             </div>
-        </div>
+        </div> */}
         <div className="headerRight">
             <div className="headerIcons">
                 <div className="headerIconItem">

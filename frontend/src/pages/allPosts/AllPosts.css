@@ -13,9 +13,14 @@
     background-size: 40% auto, 40% auto;
 }
 
+.allArticlesContainer {
+    padding-top: 50px;
+}
+
 .allArticles {
     min-height: 100vh;
     min-width: 100vw;
     padding: 5%;
     text-align: center;
 }
+

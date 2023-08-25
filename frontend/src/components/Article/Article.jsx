@@ -24,7 +24,6 @@ function Article({ post }) {
   const editedTitle = useRef()
   const editedDesc = useRef()
 
-
   // Function to toggle editing mode
   const toggleEdit = () => {
     setEditing(!editing);
@@ -77,7 +76,6 @@ function Article({ post }) {
     }
 }
 
-
   //get a user data to show the post (user who posted the article)
   useEffect(() => {
     const fetchUser = async() => {
@@ -87,7 +85,6 @@ function Article({ post }) {
     };
     fetchUser();
   }, [post.userId]);
-
 
   //like function
   const handleLike = async () => {
@@ -102,8 +99,8 @@ function Article({ post }) {
 
   return (
     <>
-      <Col>
-        <Card className='card' style={{height: '30rem', marginBottom:'3rem'}}>
+      <Col style={{height: '100%'}}>
+        <Card className='card' style={{marginBottom:'3rem'}}>
           <div className='postUser'>
               <Link to={`/friends/${user.username}`} state={{post: "post"}} >  {/* state = to pass the data of post to Edit page */}
                 <img
@@ -118,15 +115,16 @@ function Article({ post }) {
                 <span className='postUsername'>{ user.username }</span>
                 <br />
                 <span className="postDate">{format(post.createdAt)}</span>
+                {/* <span className="postDate">{moment(post.created_at).format('YYYY/MM/DD HH:mm')}</span> */}
           </div>
           <Card.Img
           variant="top"
-          style={{ height: '15rem' }}
+          style={{ height: '10rem' }}
           src={PUBLIC_FOLDER + post.img || PUBLIC_FOLDER + "person/noAvatar.png"}
           />
-          <Card.Body style={{ height: '10rem' }}>
-            <Card.Title>{post.title}</Card.Title>
-            <Card.Text>{post.description}</Card.Text>
+          <Card.Body style={{ height: '10rem', marginBottom:"1rem" }}>
+            <Card.Title style={{ height: '5%', marginBottom:"1rem" }}>{post.title}</Card.Title>
+            <Card.Text style={{ height: '40%'  }}>{post.description}</Card.Text>
             <div className="postBottomLeft">
               <img
               className="likeIcon"
@@ -136,7 +134,6 @@ function Article({ post }) {
               />
               <span className="postLikeCounter"> {like} people like it</span>
             </div>
-
             {/* Edit and Delete buttons */}
             {currentUser._id === post.userId && (
               <div>
@@ -144,7 +141,7 @@ function Article({ post }) {
                 <button onClick={handleDelete}>Delete</button>
               </div>
             )}
-          {/* Renderizar el formulario de edición si está en modo de edición */}
+          {/* Render the edit form if in edit mode */}
           {editing && (
             <div className="editForm">
               <form className='editPost-form'onSubmit={(e) => handleUpdate(e)} >
@@ -161,6 +158,7 @@ function Article({ post }) {
                 cols="40"
                 type='text'
                 placeholder="Description"
+                maxlength="10"
                 ref={editedDesc}
                 />
                 <input
@@ -174,16 +172,7 @@ function Article({ post }) {
               </form>
             </div>
           )}
-
-
-
-
-
-
-
-
           </Card.Body>
-
         </Card>
       </Col>
     </>

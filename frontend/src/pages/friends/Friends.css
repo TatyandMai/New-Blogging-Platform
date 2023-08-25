@@ -122,10 +122,6 @@
     object-fit: cover;
 }
 
-
-
-
-
 @media screen and (max-width: 820px){
     .profile-second-container {
         min-height: 80vh;

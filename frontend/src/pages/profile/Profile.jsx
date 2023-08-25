@@ -33,7 +33,6 @@ useEffect(() => {
   fetchPosts();
 }, [user._id]);
 
-
 //to show friends
 useEffect(() => {
   const getFriends = async() => {
@@ -68,12 +67,10 @@ useEffect(() => {
                 <h3>{user.desc}</h3>
               </div>
             </div>
-
             <div className="bottomRight">
               <div className="friendsTitle">
                 <h2>Friends</h2>
               </div>
-
               <div>
                 <ul className="friendsList" key={user.id}>
                   {friends.map((friend) => (
@@ -93,13 +90,11 @@ useEffect(() => {
                   ))}
                 </ul>
               </div>
-
-
             </div>
           </div>
         <hr />
           <div className="profile-second-container">
-            <h1>POST and FRIEND'S ARTICLES</h1>
+            <h1>YOUR POST and FRIEND'S ARTICLES</h1>
             <Row xs={2} md={4} className="g-6">
               {posts.map((post) => (
                 <div>

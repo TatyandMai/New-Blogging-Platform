@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding-top: 50px;
 }
 
 .setting-top img {
@@ -19,6 +20,7 @@
     height: 100px;
     border-radius: 50%;
     background-color: white;
+    margin-top: 30px;
 }
 
 .setting-name {
@@ -38,6 +40,7 @@
     align-items: center;
     background-color: #bfcdbb;
 }
+
 .userDescription, input, h4 {
     width: 80%;
 }
@@ -52,9 +55,67 @@
     margin-top: 10px;
 }
 
+@media screen and (max-width:513px){
+    h1 {
+        font-size: 20px;
+    }
+
+    .setting-top img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .setting-form {
+        height: 300px;
+    }
+
+    .setting-form h4 {
+        font-size: 15px;
+    }
+
+    .setting-form input {
+        height: 20px;
+        width: 50px;
+    }
+
+    .setting-form textarea {
+        height: 100px;
+        width: 200px;
+    }
+
+    .setting-button {
+        height: 30px;
+        width: 90px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .setting-top h5 {
+        font-size: 15px;
+    }
+
+    .setting-form {
+        width: 400px;
+        height: 500px;
+        padding: 20px;
+    }
+}
+
 @media screen and (max-width:414px){
-    .user-profile img {
-        width: 70px;
-        height: 70px;
+    .setting {
+        padding-top: 30px;
+    }
+
+    .setting h1{
+        font-size: 20px;
+    }
+
+    .setting-form {
+        width: 300px;
+        height: 430px;
+    }
+
+    .setting h4 {
+        font-size: 15px;
     }
 }

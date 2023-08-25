@@ -4,6 +4,7 @@ import "./Register.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function Register() {
 
     const username= useRef();
@@ -48,7 +49,6 @@ export default function Register() {
                     required
                     ref={username}
                     />
-
                     <input
                     className='register-input'
                     type='email'

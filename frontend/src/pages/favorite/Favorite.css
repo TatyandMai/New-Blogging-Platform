@@ -13,6 +13,10 @@
     background-size: 40% auto, 40% auto;
 }
 
+.favorite-container h1{
+    padding-top: 50px;
+}
+
 .userProfile {
     display: flex;
     flex-direction: column;

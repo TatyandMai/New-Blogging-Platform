@@ -67,29 +67,6 @@ export default function Setting() {
 
     console.log(user)
 
-
-    // const handleCover = async (e) => {
-    //     e.preventDefault();
-    //     const newPicture = {
-    //         userId: user._id
-    //     }
-    //         //set profile picture
-    //         const data = new FormData();
-    //         const fileName = Date.now() + coverPic.name;
-    //         data.append("name", fileName);
-    //         data.append("file", coverPic);
-    //         newPicture.coverPicture = fileName;
-    //         // console.log(newPicture)
-    //         try{
-    //             //API for setting profile picture
-    //             await axios.put(`/setting/coverPic/${user._id}`, data); //setting.js 2
-    //         }catch(err){
-    //             console.log(err)
-    //         }
-    //         // navigate(`/profile/${user._id}`);
-    //         window.location.reload(); //reload automatically after posted
-    // }
-
   return (
     <>
     <Header />
@@ -107,7 +84,6 @@ export default function Setting() {
                 <h5>{user.username}</h5>
             </div>
         </div>
-
         <form className='setting-form' onSubmit={(e) => handleProfile(e)}>
             <h4>Select your profile picture</h4>
             <input
@@ -136,21 +112,8 @@ export default function Setting() {
             placeholder="Description"
             ref={desc}
             />
-
-            <button className="setting-button" type='submit' >Set your profile picture</button>
+            <button className="setting-button" type='submit' >Set</button>
         </form>
-
-        {/* <form className='setting-form' onSubmit={(e) => handleCover(e)}>
-            <h4>Select your profile cover picture</h4>
-            <input
-            type="file"
-            className="setCoverPic"
-            name="picture"
-            accept='.png, .jpeg, .jpg'
-            onChange={(e) => setCoverPic(e.target.files[0])}
-            />
-            <button className="setting-button" type='submit' >Set your cover picture</button>
-        </form> */}
     </div>
     </>
   )

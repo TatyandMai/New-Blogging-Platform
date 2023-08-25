@@ -30,7 +30,7 @@ export default function Favorite() {
     <>
         <Header />
         <div className="favorite-container">
-        <h1>Favorite Articles</h1>
+        <h1>FAVORITE ARTICLES</h1>
             <div className="userProfile">
                 <img
                 src={

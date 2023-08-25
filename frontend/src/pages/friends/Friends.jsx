@@ -16,7 +16,6 @@ export default function Profile() {
 
     const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
     const { user: currentUser, dispatch } = useContext(AuthContext);
-
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState({});
     const [friends, setFriends] = useState([]);
@@ -25,7 +24,7 @@ export default function Profile() {
 
     //follow
     useEffect(()=>{
-       setFollowed(currentUser.followings.includes(user?._id))
+        setFollowed(currentUser.followings.includes(user?._id))
     }, [currentUser, user._id]);
 
     //to get a user data
@@ -39,7 +38,6 @@ export default function Profile() {
         fetchUser();
     }, [username]);
 
-
     //to show posts（friend's posts）
     useEffect(() => {
         const fetchPosts = async() => {
@@ -52,7 +50,6 @@ export default function Profile() {
         };
         fetchPosts();
     }, [user]);
-
 
     //to show friends
     useEffect(() => {
@@ -68,7 +65,6 @@ export default function Profile() {
         };
         getFriends();
     }, [user._id]);
-
 
     //to follow friends
     const handleClick = async () => {
@@ -88,7 +84,6 @@ export default function Profile() {
         } catch (err) {
         }
     };
-
 
 return (
     <>
