@@ -24,10 +24,12 @@ function Header() {
   return (
     <div className="headerContainer">
         <div className="headerLeft">
+        <Link className="headerLink" to={`/allPosts/${user.username}`}>
             <img
             src={PUBLIC_FOLDER + "logo/logo4.png"}
             alt='logo'
             className="logo" />
+        </Link>
         </div>
         {/* <div className="headerCenter">
             <div className="searchBar">
