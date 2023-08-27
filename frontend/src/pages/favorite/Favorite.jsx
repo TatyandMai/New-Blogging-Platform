@@ -35,7 +35,7 @@ export default function Favorite() {
                 <img
                 src={
                     user.profilePicture
-                    ? user.profilePicture
+                    ? PUBLIC_FOLDER + user.profilePicture
                     : PUBLIC_FOLDER + "noAvatar.png"}
                     alt=""
                 />

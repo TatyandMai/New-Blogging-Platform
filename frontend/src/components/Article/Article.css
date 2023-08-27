@@ -1,6 +1,6 @@
 .editButton {
     position: relative;
-    z-index: 1; /* display on top */
+    z-index: 1; /* display at the bottom*/
 }
 
 .editPost-form {
@@ -17,7 +17,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 70%;
+    height: 90%;
     align-items: center;
     z-index: 2; /* display on top */
 }

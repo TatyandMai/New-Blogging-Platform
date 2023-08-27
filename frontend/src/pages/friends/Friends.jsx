@@ -91,8 +91,8 @@ return (
         <div className="profile">
         <div className="profile-first-container">
             <div className="profileTop">
-                <img src={user.coverPicture || PUBLIC_FOLDER + "post/3.jpeg"} alt="" className="profileBackImg"/>
-                <img src={user.profilePicture || PUBLIC_FOLDER + "noAvatar.png"} alt="" className="profileImg"/>
+                <img src={PUBLIC_FOLDER + user.coverPicture || PUBLIC_FOLDER + "noImage.jpeg"} alt="" className="profileBackImg"/>
+                <img src={PUBLIC_FOLDER + user.profilePicture || PUBLIC_FOLDER + "noAvatar.png"} alt="" className="profileImg"/>
             </div>
             <div className="profileName">
                 <h2>{user.username}</h2>
@@ -101,7 +101,7 @@ return (
                 {user.username !== currentUser.username && (
                 <button className="followButton" onClick={handleClick}>
                     {followed ? "Unfollow" : "Follow"}
-                    {followed ? <AddIcon /> : <RemoveIcon />}
+                    {followed ? <RemoveIcon />: <AddIcon /> }
                 </button>
                 )}
             </div>

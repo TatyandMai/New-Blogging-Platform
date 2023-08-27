@@ -52,8 +52,23 @@ useEffect(() => {
       <div className="profile">
         <div className="profile-first-container">
           <div className="profileTop">
-            <img src={user.profilePicture ?PUBLIC_FOLDER + user.coverPicture :PUBLIC_FOLDER + "noImage.jpeg"} alt="" className="profileBackImg"/>
-            <img src={user.coverPicture ?PUBLIC_FOLDER + user.profilePicture :PUBLIC_FOLDER + "noAvatar.png"} alt="" className="profileImg"/>
+          <img src={PUBLIC_FOLDER + user.coverPicture || PUBLIC_FOLDER + "noAvatar.png"} alt="" className="profileBackImg"/>
+          {/* <img
+            src={
+              user.coverPicture
+              ? PUBLIC_FOLDER + user.coverPicture
+              : PUBLIC_FOLDER + "noImage.png"}
+              alt=""
+              className="profileImg"
+            /> */}
+            <img
+            src={
+              user.profilePicture
+              ? PUBLIC_FOLDER + user.profilePicture
+              : PUBLIC_FOLDER + "noAvatar.png"}
+              alt=""
+              className="profileImg"
+            />
           </div>
           <div className="profileName">
               <h2>{user.username}</h2>
@@ -79,7 +94,7 @@ useEffect(() => {
                             <img
                             src={
                             friend.profilePicture
-                            ? friend.profilePicture
+                            ? PUBLIC_FOLDER + friend.profilePicture
                             : PUBLIC_FOLDER + "noAvatar.png" }
                             alt=''
                             className='friendProfileImg'

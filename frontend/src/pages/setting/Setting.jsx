@@ -63,6 +63,7 @@ export default function Setting() {
             }catch(err){
                 console.log(err)
             }
+            window.location.reload(); //reload automatically after posted
     }
 
     console.log(user)
